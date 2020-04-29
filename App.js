@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, StatusBar, SafeAreaView } from "react-native";
+import { View, Keyboard } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NavigationContainer, } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -20,7 +20,7 @@ import Score from "./components/Score";
 const Tab = createBottomTabNavigator();
 const Home = () => {
     return (
-        <Tab.Navigator initialRouteName="decks">
+        <Tab.Navigator initialRouteName="addDeck">
             <Tab.Screen name="decks" component={DeckView} options={{
                 tabBarLabel: "Decks",
                 tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="card-text-outline" size={30} color={color} />)
@@ -36,12 +36,17 @@ const Home = () => {
 const Stack = createStackNavigator();
 
 class App extends React.Component {
+    handleUnhandledTouches = () => {
+        Keyboard.dismiss();
+        return false;
+    }
+    
     render = () => {
         return (
             <Provider store={createStore(reducer)}>
-                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                    <NavigationContainer style={styles.container}>
-                        <Stack.Navigator>
+                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }} onStartShouldSetResponder={this.handleUnhandledTouches}>
+                    <NavigationContainer>
+                        <Stack.Navigator initialRouteName="home">
                             <Stack.Screen name="home" component={Home} options={{
                                 headerShown: false,
                                 title: "Decks",
@@ -59,15 +64,5 @@ class App extends React.Component {
     }
 
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-});
-
 
 export default App;
