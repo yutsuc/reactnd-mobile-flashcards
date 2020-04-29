@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, StatusBar, SafeAreaView } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import Constants from "expo-constants";
 import DeckView from "./components/DeckView";
 import AddDeck from "./components/AddDeck";
 import Deck from "./components/Deck";
@@ -16,11 +17,11 @@ const Home = () => {
         <Tab.Navigator initialRouteName="decks">
             <Tab.Screen name="decks" component={DeckView} options={{
                 tabBarLabel: "Decks",
-                tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="card-text-outline" color={color} />)
+                tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="card-text-outline" size={30} color={color} />)
             }} />
             <Tab.Screen name="addDeck" component={AddDeck} options={{
                 tabBarLabel: "Add Deck",
-                tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="plus-box-outline" color={color} />)
+                tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="plus-box-outline" size={30} color={color} />)
             }} />
         </Tab.Navigator>
     );
@@ -29,10 +30,11 @@ const Home = () => {
 const Stack = createStackNavigator();
 
 class App extends React.Component {
+
     render = () => {
         return (
-            <View style={{ flex: 1 }}>
-                <NavigationContainer>
+            <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                <NavigationContainer style={styles.container}>
                     <Stack.Navigator>
                         <Stack.Screen name="home" component={Home} options={{
                             headerShown: false
