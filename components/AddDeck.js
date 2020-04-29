@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         backgroundColor: blue,
-        justifyContent: "flex-end",
         alignSelf: "center",
     },
     submitBtnText: {
