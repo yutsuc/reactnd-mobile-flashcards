@@ -15,12 +15,13 @@ import AddCard from "./components/AddCard";
 import Quiz from "./components/Quiz";
 import QuizView from "./components/QuizView";
 import Score from "./components/Score";
+import { blue } from "./utils/color";
 
 
 const Tab = createBottomTabNavigator();
 const Home = () => {
     return (
-        <Tab.Navigator initialRouteName="addDeck">
+        <Tab.Navigator initialRouteName="addDeck" tabBarOptions={{activeTintColor: blue}}>
             <Tab.Screen name="decks" component={DeckView} options={{
                 tabBarLabel: "Decks",
                 tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="card-text-outline" size={30} color={color} />)

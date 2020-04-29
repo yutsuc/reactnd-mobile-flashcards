@@ -17,6 +17,7 @@ class AddDeck extends React.Component {
         const { dispatch, navigation } = this.props;
         dispatch(addDeck(this.state.title));
         this.setState({ title: "" });
+        // change routing to created deck
         navigation.navigate("decks");
     }
 
@@ -31,7 +32,7 @@ class AddDeck extends React.Component {
                     placeholder="Deck Title"
                     onChangeText={this.handleTextChange} />
                 <TouchableOpacity style={styles.submitBtn} onPress={this.handleSubmit}>
-                    <Text style={styles.submitBtnText}>Submit</Text>
+                    <Text style={styles.submitBtnText}>Creat Deck</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         );
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 40,
-        fontWeight: "800",
+        fontWeight: "700",
         textAlign: "center",
     },
     input: {
