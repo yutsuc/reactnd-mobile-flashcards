@@ -5,6 +5,9 @@ import { NavigationContainer, } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Constants from "expo-constants";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducer from "./reducers";
 import DeckView from "./components/DeckView";
 import AddDeck from "./components/AddDeck";
 import Deck from "./components/Deck";
@@ -12,6 +15,7 @@ import AddCard from "./components/AddCard";
 import Quiz from "./components/Quiz";
 import QuizView from "./components/QuizView";
 import Score from "./components/Score";
+
 
 const Tab = createBottomTabNavigator();
 const Home = () => {
@@ -32,24 +36,25 @@ const Home = () => {
 const Stack = createStackNavigator();
 
 class App extends React.Component {
-
     render = () => {
         return (
-            <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
-                <NavigationContainer style={styles.container}>
-                    <Stack.Navigator>
-                        <Stack.Screen name="home" component={Home} options={{
-                            headerShown: false,
-                            title: "Decks",
-                        }} />
-                        <Stack.Screen name="deck" component={Deck} />
-                        <Stack.Screen name="addCard" component={AddCard} />
-                        <Stack.Screen name="quizView" component={QuizView} />
-                        <Stack.Screen name="quiz" component={Quiz} />
-                        <Stack.Screen name="score" component={Score} />
-                    </Stack.Navigator>
-                </NavigationContainer>
-            </View>
+            <Provider store={createStore(reducer)}>
+                <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }}>
+                    <NavigationContainer style={styles.container}>
+                        <Stack.Navigator>
+                            <Stack.Screen name="home" component={Home} options={{
+                                headerShown: false,
+                                title: "Decks",
+                            }} />
+                            <Stack.Screen name="deck" component={Deck} />
+                            <Stack.Screen name="addCard" component={AddCard} />
+                            <Stack.Screen name="quizView" component={QuizView} />
+                            <Stack.Screen name="quiz" component={Quiz} />
+                            <Stack.Screen name="score" component={Score} />
+                        </Stack.Navigator>
+                    </NavigationContainer>
+                </View>
+            </Provider>
         );
     }
 
