@@ -10,6 +10,8 @@ import AddDeck from "./components/AddDeck";
 import Deck from "./components/Deck";
 import AddCard from "./components/AddCard";
 import Quiz from "./components/Quiz";
+import QuizView from "./components/QuizView";
+import Score from "./components/Score";
 
 const Tab = createBottomTabNavigator();
 const Home = () => {
@@ -37,11 +39,14 @@ class App extends React.Component {
                 <NavigationContainer style={styles.container}>
                     <Stack.Navigator>
                         <Stack.Screen name="home" component={Home} options={{
-                            headerShown: false
+                            headerShown: false,
+                            title: "Decks",
                         }} />
                         <Stack.Screen name="deck" component={Deck} />
-                        <Stack.Screen name="addcard" component={AddCard} />
+                        <Stack.Screen name="addCard" component={AddCard} />
+                        <Stack.Screen name="quizView" component={QuizView} />
                         <Stack.Screen name="quiz" component={Quiz} />
+                        <Stack.Screen name="score" component={Score} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </View>
