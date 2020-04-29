@@ -21,7 +21,7 @@ import { blue } from "./utils/color";
 const Tab = createBottomTabNavigator();
 const Home = () => {
     return (
-        <Tab.Navigator initialRouteName="addDeck" tabBarOptions={{activeTintColor: blue}}>
+        <Tab.Navigator initialRouteName="decks" tabBarOptions={{activeTintColor: blue}}>
             <Tab.Screen name="decks" component={DeckView} options={{
                 tabBarLabel: "Decks",
                 tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="card-text-outline" size={30} color={color} />)
@@ -53,7 +53,9 @@ class App extends React.Component {
                                 title: "Decks",
                             }} />
                             <Stack.Screen name="deck" component={Deck} />
-                            <Stack.Screen name="addCard" component={AddCard} />
+                            <Stack.Screen name="addCard" component={AddCard} options={{
+                                title: "Add Card",
+                            }} />
                             <Stack.Screen name="quizView" component={QuizView} />
                             <Stack.Screen name="quiz" component={Quiz} />
                             <Stack.Screen name="score" component={Score} />
