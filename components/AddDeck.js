@@ -15,10 +15,14 @@ class AddDeck extends React.Component {
 
     handleSubmit = () => {
         const { dispatch, navigation } = this.props;
-        dispatch(addDeck(this.state.title));
+        const { title } = this.state;
+        dispatch(addDeck(title));
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'decks' }],
+        });
+        navigation.navigate("deck", { deckId: title });
         this.setState({ title: "" });
-        // change routing to created deck
-        navigation.navigate("decks");
     }
 
     render = () => {
