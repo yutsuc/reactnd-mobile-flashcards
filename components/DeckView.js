@@ -4,8 +4,14 @@ import { connect } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import DeckCard from "./DeckCard";
 import { red } from "../utils/color";
+import { getDecks } from "../utils/api";
+import { receiveDecks } from  "../actions";
 
 class DeckView extends React.Component {
+    componentDidMount = () => {
+        getDecks().then(decks => this.props.dispatch(receiveDecks(decks)));
+    }
+
     render = () => {
         const { decks, deckTitles } = this.props;
         return (

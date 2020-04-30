@@ -2,12 +2,14 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { connect } from "react-redux";
 import { removeDeck } from "../actions";
+import { removeDeckFromStorage } from "../utils/api";
 import { blue, white, red, orange, disabledOrange } from "../utils/color";
 
 class Deck extends React.Component {
     handleDeleteDeck = () => {
         const { navigation, dispatch, title } = this.props;
         dispatch(removeDeck(title));
+        removeDeckFromStorage(title);
         navigation.navigate("home");
     }
 

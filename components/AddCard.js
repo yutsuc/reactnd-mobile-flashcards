@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { addCard } from "../actions";
+import { addCardToDeck } from "../utils/api";
 import { white, blue, disabledBlue } from "../utils/color";
 
 class AddCard extends React.Component {
@@ -21,6 +22,7 @@ class AddCard extends React.Component {
         const { dispatch, navigation } = this.props;
         const { deckName } = this.props.route.params;
         dispatch(addCard(deckName, { question, answer }));
+        addCardToDeck(deckName, { question, answer });
         navigation.goBack();
         this.setState({
             question: "",

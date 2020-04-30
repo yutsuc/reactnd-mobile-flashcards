@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Text, TextInput, StyleSheet, TouchableOpacity, Ke
 import { connect } from "react-redux";
 import { blue, white, disabledBlue } from "../utils/color";
 import { addDeck } from "../actions";
+import { saveDeckTitle } from "../utils/api";
 
 class AddDeck extends React.Component {
     state = {
@@ -18,6 +19,7 @@ class AddDeck extends React.Component {
         const { dispatch, navigation } = this.props;
         const { title } = this.state;
         dispatch(addDeck(title));
+        saveDeckTitle(title);
         navigation.navigate("decks");
         navigation.navigate("deck", { deckId: title });
         this.setState({ title: "" });
