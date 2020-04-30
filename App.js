@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Keyboard } from "react-native";
+import { View, Keyboard, StatusBar } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NavigationContainer, } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -44,6 +44,7 @@ class App extends React.Component {
         return (
             <Provider store={createStore(reducer)}>
                 <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }} onStartShouldSetResponder={this.handleUnhandledTouches}>
+                    <StatusBar translucent barStyle="dark-content" />
                     <NavigationContainer>
                         <Stack.Navigator initialRouteName="home">
                             <Stack.Screen name="home" component={Home} options={{
