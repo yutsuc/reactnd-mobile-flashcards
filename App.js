@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Keyboard } from "react-native";
+import { View, Keyboard, StatusBar } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NavigationContainer, } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -12,9 +12,7 @@ import DeckView from "./components/DeckView";
 import AddDeck from "./components/AddDeck";
 import Deck from "./components/Deck";
 import AddCard from "./components/AddCard";
-import Quiz from "./components/Quiz";
 import QuizView from "./components/QuizView";
-import Score from "./components/Score";
 import { blue } from "./utils/color";
 
 
@@ -46,6 +44,7 @@ class App extends React.Component {
         return (
             <Provider store={createStore(reducer)}>
                 <View style={{ flex: 1, paddingTop: Constants.statusBarHeight }} onStartShouldSetResponder={this.handleUnhandledTouches}>
+                    <StatusBar translucent barStyle="dark-content" />
                     <NavigationContainer>
                         <Stack.Navigator initialRouteName="home">
                             <Stack.Screen name="home" component={Home} options={{
@@ -56,9 +55,9 @@ class App extends React.Component {
                             <Stack.Screen name="addCard" component={AddCard} options={{
                                 title: "Add Card",
                             }} />
-                            <Stack.Screen name="quizView" component={QuizView} />
-                            <Stack.Screen name="quiz" component={Quiz} />
-                            <Stack.Screen name="score" component={Score} />
+                            <Stack.Screen name="quizView" component={QuizView} options={{
+                                title: "Quiz",
+                            }} />
                         </Stack.Navigator>
                     </NavigationContainer>
                 </View>
