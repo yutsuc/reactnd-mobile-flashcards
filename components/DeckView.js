@@ -14,7 +14,7 @@ class DeckView extends React.Component {
                     ListEmptyComponent={
                         <View style={{ alignItems: "center" }}>
                             <Ionicons name="ios-warning" size={50} color={red} />
-                            <Text style={styles.noDecksText}>No flashcards added</Text>
+                            <Text style={styles.noDecksText}>No flashcards</Text>
                         </View>
                     }
                     data={deckTitles}

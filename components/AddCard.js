@@ -45,7 +45,10 @@ class AddCard extends React.Component {
                     onChangeText={(input) => this.handleTextChange(input, "answer")}
                     placeholder="Answer"
                 />
-                <TouchableOpacity style={[styles.submitBtn, { backgroundColor: question === "" || answer === "" ? disabledBlue : blue }]} onPress={this.handleSubmit} disabled={question === "" || answer === ""}>
+                <TouchableOpacity
+                    style={[styles.submitBtn, { backgroundColor: question === "" || answer === "" ? disabledBlue : blue }]}
+                    onPress={this.handleSubmit} disabled={question === "" || answer === ""}
+                >
                     <Text style={styles.submitBtnText}>Submit</Text>
                 </TouchableOpacity>
             </View>

@@ -33,7 +33,9 @@ class AddDeck extends React.Component {
                     value={title}
                     placeholder="Deck Title"
                     onChangeText={this.handleTextChange} />
-                <TouchableOpacity style={[styles.submitBtn, { backgroundColor: title === "" ? disabledBlue : blue }]} onPress={this.handleSubmit} disabled={title === ""}>
+                <TouchableOpacity style={[styles.submitBtn, { backgroundColor: title === "" ? disabledBlue : blue }]}
+                    onPress={this.handleSubmit} disabled={title === ""}
+                >
                     <Text style={styles.submitBtnText}>Create Deck</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
