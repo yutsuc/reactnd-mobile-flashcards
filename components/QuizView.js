@@ -1,15 +1,56 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
+import { connect } from "react-redux";
+import Quiz from "./Quiz";
+import Score from "./Score";
 
 class QuizView extends React.Component {
+    state = {
+        currentQuestionIndex: 0,
+        correctCount: 0,
+        showScore: false,
+    }
+
+    handleAnswer = (correct) => {
+        if (correct) {
+            this.setState((prevState) => ({
+                correctCount: prevState.correctCount + 1,
+            }));
+        }
+        this.setState((prevState) => ({
+            currentQuestionIndex: prevState.currentQuestionIndex + 1,
+            showScore: prevState.currentQuestionIndex + 1 === this.props.questions.length,
+        }));
+    }
+
+    handleRestart = () => {
+        this.setState({
+            currentQuestionIndex: 0,
+            correctCount: 0,
+            showScore: false,
+        });
+    }
+
     render = () => {
+        const { title, questions, navigation } = this.props;
+        const { currentQuestionIndex, correctCount, showScore } = this.state;
+        const score = ((correctCount / questions.length) * 100).toFixed(2);
         return (
             <View>
-                <Text>QuizView</Text>
-                <Button title="Q1" onPress={() => this.props.navigation.navigate("quiz")} />
+                {!showScore && <Text>{currentQuestionIndex + 1} / {questions.length}</Text>}
+                {!showScore && <Quiz question={questions[currentQuestionIndex]} handleAnswer={this.handleAnswer} />}
+                {showScore && <Score score={score} handleRestart={this.handleRestart} handleBackToDeck={() => navigation.navigate("deck", { deckId: title })} />}
             </View>
         );
     }
 }
 
-export default QuizView;
+const mapStateToProps = (decks, { route }) => {
+    const deck = decks[route.params.deckName];
+    return {
+        title: deck && deck.title,
+        questions: deck && deck.questions,
+    }
+}
+
+export default connect(mapStateToProps)(QuizView);

@@ -1,13 +1,18 @@
 import React from "react";
-import { View, Text, Button } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 
 class Score extends React.Component {
     render = () => {
+        const { score, handleRestart, handleBackToDeck } = this.props;
         return (
             <View>
-                <Text>Score</Text>
-                <Button title="Restart" onPress={() => this.props.navigation.navigate("quizView")} />
-                <Button title="Back To Deck" onPress={() => this.props.navigation.navigate("deck")} />
+                <Text>{score}</Text>
+                <TouchableOpacity onPress={handleRestart}>
+                    <Text>Restart</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleBackToDeck}>
+                    <Text>Back To Deck</Text>
+                </TouchableOpacity>
             </View>
         );
     }

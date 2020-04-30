@@ -12,9 +12,7 @@ import DeckView from "./components/DeckView";
 import AddDeck from "./components/AddDeck";
 import Deck from "./components/Deck";
 import AddCard from "./components/AddCard";
-import Quiz from "./components/Quiz";
 import QuizView from "./components/QuizView";
-import Score from "./components/Score";
 import { blue } from "./utils/color";
 
 
@@ -56,9 +54,9 @@ class App extends React.Component {
                             <Stack.Screen name="addCard" component={AddCard} options={{
                                 title: "Add Card",
                             }} />
-                            <Stack.Screen name="quizView" component={QuizView} />
-                            <Stack.Screen name="quiz" component={Quiz} />
-                            <Stack.Screen name="score" component={Score} />
+                            <Stack.Screen name="quizView" component={QuizView} options={{
+                                title: "Quiz",
+                            }} />
                         </Stack.Navigator>
                     </NavigationContainer>
                 </View>

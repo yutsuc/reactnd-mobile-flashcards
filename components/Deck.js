@@ -26,7 +26,7 @@ class Deck extends React.Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.btn, { backgroundColor: cardsCount === 0 ? disabledOrange : orange }]}
-                    onPress={() => this.props.navigation.navigate("quizView")}
+                    onPress={() => this.props.navigation.navigate("quizView", {deckName: title})}
                     disabled={cardsCount === 0}
                 >
                     <Text style={styles.btnText}>Start Quiz</Text>
