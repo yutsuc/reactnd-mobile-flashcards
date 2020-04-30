@@ -33,7 +33,9 @@ To get started developing right away:
 ├── reducers # Handling various states returned from actions
 │   └── index.js
 └── utils
-    └── color.js # Colors being used in the app
+    ├── api.js # API to store items to AsyncStorage
+    ├── color.js # Colors being used in the app
+    └── helper.js # Notification helpers
 ```
 
 ## Important
