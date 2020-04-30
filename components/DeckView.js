@@ -1,20 +1,26 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { connect } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
+import DeckCard from "./DeckCard";
+import { orange, red } from "../utils/color";
 
 class DeckView extends React.Component {
     render = () => {
-        const { decks, navigation } = this.props;
+        const { decks, deckTitles } = this.props;
         return (
-            <View style={styles.container}>
-                {decks && Object.keys(decks).map(key => (
-                    <TouchableOpacity key={key} style={styles.deckCard} onPress={() => navigation.navigate("deck", { deckId: key })}>
-                        <Text style={styles.deckTitle}>{key}</Text>
-                        <Text style={styles.cardCount}>{decks[key].length} Cards</Text>
-                    </TouchableOpacity>
-                ))}
-
-            </View>
+            <SafeAreaView style={styles.container}>
+                <FlatList
+                    ListEmptyComponent={
+                        <View style={{ alignItems: "center" }}>
+                            <Ionicons name="ios-warning" size={50} color={red} />
+                            <Text style={styles.noDecksText}>No flashcards added</Text>
+                        </View>
+                    }
+                    data={deckTitles}
+                    keyExtractor={item => item}
+                    renderItem={({ item }) => <DeckCard title={item} count={decks[item].length} />} />
+            </SafeAreaView>
         );
     }
 }
@@ -24,26 +30,34 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
     },
-    deckCard: {
-        borderWidth: 2,
-        borderRadius: 10,
-        margin: 10,
-        padding: 10,
-        alignItems: "center",
-    },
-    deckTitle: {
-        fontSize: 40,
-        fontWeight: "700",
-        paddingBottom: 5,
-    },
-    cardCount: {
-        fontSize: 20,
-        color: "gray",
+    noDecksText: {
+        fontSize: 30,
+        fontWeight: "600",
+        color: red,
     }
+    // deckCard: {
+    //     borderWidth: 2,
+    //     borderRadius: 10,
+    //     margin: 10,
+    //     padding: 10,
+    //     alignItems: "center",
+    // },
+    // deckTitle: {
+    //     fontSize: 40,
+    //     fontWeight: "700",
+    //     paddingBottom: 5,
+    // },
+    // cardCount: {
+    //     fontSize: 20,
+    //     color: "gray",
+    // }
 })
 
 const mapStateToProps = (decks) => {
-    return { decks };
+    return {
+        decks,
+        deckTitles: decks && Object.keys(decks).sort(),
+    };
 }
 
 export default connect(mapStateToProps)(DeckView);

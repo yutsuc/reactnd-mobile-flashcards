@@ -9,7 +9,6 @@ class Deck extends React.Component {
     }
 
     render = () => {
-        console.log(this.props);
         const { title, cards } = this.props;
         this.props.navigation.setOptions({ title });
         return (

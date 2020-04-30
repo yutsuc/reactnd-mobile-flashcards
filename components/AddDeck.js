@@ -1,5 +1,5 @@
 import React from "react";
-import { KeyboardAvoidingView, Text, TextInput, StyleSheet, TouchableOpacity } from "react-native";
+import { KeyboardAvoidingView, Text, TextInput, StyleSheet, TouchableOpacity, Keyboard } from "react-native";
 import { connect } from "react-redux";
 import { blue, white } from "../utils/color";
 import { addDeck } from "../actions";
@@ -14,13 +14,11 @@ class AddDeck extends React.Component {
     }
 
     handleSubmit = () => {
+        Keyboard.dismiss();
         const { dispatch, navigation } = this.props;
         const { title } = this.state;
         dispatch(addDeck(title));
-        navigation.reset({
-            index: 0,
-            routes: [{ name: 'decks' }],
-        });
+        navigation.push("home");
         navigation.navigate("deck", { deckId: title });
         this.setState({ title: "" });
     }
