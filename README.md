@@ -37,7 +37,7 @@ To get started developing right away:
 ```
 
 ## Important
-This app has only bee tested on **iPhone 7**
+This app has only been tested on **iPhone 7**
 
 ## Expo CLI
 
