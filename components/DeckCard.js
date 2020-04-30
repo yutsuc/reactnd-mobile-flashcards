@@ -1,16 +1,29 @@
 import React from "react";
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import {useNavigation} from "@react-navigation/native";
+import { Text, TouchableOpacity, StyleSheet, Animated } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const DeckCard = (props) =>{
-    const {title, count} = props;
+const DeckCard = (props) => {
+    const { title, count } = props;
     const navigation = useNavigation();
+    const bounceValue = new Animated.Value(1);
+
+    const goToDeck = () => {
+        Animated.sequence([
+            Animated.timing(bounceValue, { duration: 100, toValue: 2 }),
+            Animated.spring(bounceValue, { toValue: 1, friction: 5 })
+        ]).start(() => {
+            navigation.navigate("deck", { deckId: title });
+        });
+
+    }
 
     return (
-        <TouchableOpacity style={styles.deckCard} onPress={() => navigation.navigate("deck", { deckId: title })}>
-            <Text style={styles.deckTitle}>{title}</Text>
-            <Text style={styles.cardCount}>{count} Cards</Text>
-        </TouchableOpacity>
+        <Animated.View style={{ transform: [{ scale: bounceValue }] }}>
+            <TouchableOpacity style={styles.deckCard} onPress={goToDeck}>
+                <Text style={[styles.deckTitle]}>{title}</Text>
+                <Text style={styles.cardCount}>{count} Cards</Text>
+            </TouchableOpacity>
+        </Animated.View>
     );
 }
 const styles = StyleSheet.create({
