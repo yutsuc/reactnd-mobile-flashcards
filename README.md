@@ -14,6 +14,7 @@ To get started developing right away:
 ├── app.json
 ├── App.js # Routes different tabs and stacks to different components
 ├── babel.config.js
+├── COPYING.txt
 ├── package.json
 ├── README.md # This file.
 ├── actions # Actions and action creators
