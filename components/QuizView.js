@@ -34,7 +34,7 @@ class QuizView extends React.Component {
     render = () => {
         const { title, questions, navigation } = this.props;
         const { currentQuestionIndex, correctCount, showScore } = this.state;
-        const score = ((correctCount / questions.length) * 100).toFixed(2);
+        const score = ((correctCount / questions.length) * 100).toFixed(0);
         return (
             <View style={styles.container}>
                 {!showScore && <Text style={styles.progress}>{currentQuestionIndex + 1} / {questions.length}</Text>}
