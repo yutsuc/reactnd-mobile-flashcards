@@ -8,16 +8,16 @@ class Deck extends React.Component {
     handleDeleteDeck = () => {
         const { navigation, dispatch, title } = this.props;
         dispatch(removeDeck(title));
-        navigation.replace("home");
+        navigation.navigate("home");
     }
 
     render = () => {
-        const { title, cards } = this.props;
+        const { title, cardsCount } = this.props;
         this.props.navigation.setOptions({ title });
         return (
             <View style={styles.container}>
                 <Text style={styles.deckTitle}>{title}</Text>
-                <Text style={styles.cardCount}>{cards.length} Cards</Text>
+                <Text style={styles.cardCount}>{cardsCount} Cards</Text>
                 <TouchableOpacity
                     style={[styles.btn, { backgroundColor: blue }]}
                     onPress={() => this.props.navigation.navigate("addCard", { deckName: title })}
@@ -25,9 +25,9 @@ class Deck extends React.Component {
                     <Text style={styles.btnText}>Add Card</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.btn, { backgroundColor: cards.length === 0 ? disabledOrange : orange }]}
+                    style={[styles.btn, { backgroundColor: cardsCount === 0 ? disabledOrange : orange }]}
                     onPress={() => this.props.navigation.navigate("quizView")}
-                    disabled={cards.length === 0}
+                    disabled={cardsCount === 0}
                 >
                     <Text style={styles.btnText}>Start Quiz</Text>
                 </TouchableOpacity>
@@ -73,9 +73,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (decks, { route }) => {
+    const deck = decks[route.params.deckId];
     return {
-        title: route.params.deckId,
-        cards: decks[route.params.deckId],
+        title: deck && deck.title,
+        cardsCount: deck && deck.questions.length,
     };
 }
 

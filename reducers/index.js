@@ -9,15 +9,18 @@ export default function decks(state = {}, action) {
         case ADD_DECK:
             return {
                 ...state,
-                [action.deckName]: [],
+                [action.deckName]: {
+                    title: action.deckName,
+                    questions: [],
+                },
             };
         case ADD_CARD:
             return {
                 ...state,
-                [action.deckName]: [
+                [action.deckName]: {
                     ...state[action.deckName],
-                    action.card
-                ],
+                    questions: state[action.deckName].questions.concat(action.card),
+                },
             };
         case REMOVE_DECK:
             delete state[action.deckName];

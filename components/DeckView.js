@@ -19,7 +19,7 @@ class DeckView extends React.Component {
                     }
                     data={deckTitles}
                     keyExtractor={item => item}
-                    renderItem={({ item }) => <DeckCard title={item} count={decks[item].length} />} />
+                    renderItem={({ item }) => <DeckCard title={item} count={decks[item].questions.length} />} />
             </SafeAreaView>
         );
     }
