@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { connect } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import DeckCard from "./DeckCard";
-import { orange, red } from "../utils/color";
+import { red } from "../utils/color";
 
 class DeckView extends React.Component {
     render = () => {

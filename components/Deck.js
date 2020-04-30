@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { connect } from "react-redux";
 import { removeDeck } from "../actions";
-import { blue, white, red, orange } from "../utils/color";
+import { blue, white, red, orange, disabledOrange } from "../utils/color";
 
 class Deck extends React.Component {
     handleDeleteDeck = () => {
@@ -18,14 +18,24 @@ class Deck extends React.Component {
             <View style={styles.container}>
                 <Text style={styles.deckTitle}>{title}</Text>
                 <Text style={styles.cardCount}>{cards.length} Cards</Text>
-                <TouchableOpacity style={[styles.btn, styles.addBtn]} onPress={() => this.props.navigation.navigate("addCard", { deckName: title })}>
+                <TouchableOpacity
+                    style={[styles.btn, { backgroundColor: blue }]}
+                    onPress={() => this.props.navigation.navigate("addCard", { deckName: title })}
+                >
                     <Text style={styles.btnText}>Add Card</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.btn, styles.quizBtn]} onPress={() => this.props.navigation.navigate("quizView")} >
+                <TouchableOpacity
+                    style={[styles.btn, { backgroundColor: cards.length === 0 ? disabledOrange : orange }]}
+                    onPress={() => this.props.navigation.navigate("quizView")}
+                    disabled={cards.length === 0}
+                >
                     <Text style={styles.btnText}>Start Quiz</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.btn, styles.deleteBtn]} onPress={this.handleDeleteDeck} >
-                    <Text style={[styles.btnText, styles.deleteBtnText]}>Delete Deck</Text>
+                <TouchableOpacity
+                    style={[styles.btn, { backgroundColor: "transparent", width: "auto" }]}
+                    onPress={this.handleDeleteDeck}
+                >
+                    <Text style={[styles.btnText, { color: red }]}>Delete Deck</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -53,27 +63,13 @@ const styles = StyleSheet.create({
         margin: 10,
         padding: 10,
         borderRadius: 10,
+        width: Dimensions.get('window').width / 2,
     },
     btnText: {
         fontSize: 22,
         color: white,
         textAlign: "center",
-    },
-    addBtn: {
-        width: Dimensions.get('window').width / 2,
-        backgroundColor: blue,
-    },
-    quizBtn: {
-        width: Dimensions.get('window').width / 2,
-        backgroundColor: orange,
-    },
-    deleteBtn: {
-        backgroundColor: "transparent",
-    },
-    deleteBtnText: {
-        color: red,
     }
-
 });
 
 const mapStateToProps = (decks, { route }) => {
