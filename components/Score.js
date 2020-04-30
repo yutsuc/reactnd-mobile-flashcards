@@ -1,8 +1,13 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { white, orange, blue, red } from "../utils/color";
+import { setLocalNotification, clearLocalNotification } from "../utils/helper";
 
 class Score extends React.Component {
+    componentWillUnmount = () => {
+        clearLocalNotification().then(setLocalNotification);
+    }
+    
     render = () => {
         const { score, handleRestart, handleBackToDeck } = this.props;
         return (

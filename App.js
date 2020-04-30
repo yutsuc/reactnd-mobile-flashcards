@@ -14,12 +14,12 @@ import Deck from "./components/Deck";
 import AddCard from "./components/AddCard";
 import QuizView from "./components/QuizView";
 import { blue } from "./utils/color";
-
+import { setLocalNotification } from "./utils/helper";
 
 const Tab = createBottomTabNavigator();
 const Home = () => {
     return (
-        <Tab.Navigator initialRouteName="decks" tabBarOptions={{activeTintColor: blue}}>
+        <Tab.Navigator initialRouteName="decks" tabBarOptions={{ activeTintColor: blue }}>
             <Tab.Screen name="decks" component={DeckView} options={{
                 tabBarLabel: "Decks",
                 tabBarIcon: ({ color }) => (<MaterialCommunityIcons name="card-text-outline" size={30} color={color} />)
@@ -35,11 +35,15 @@ const Home = () => {
 const Stack = createStackNavigator();
 
 class App extends React.Component {
+    componentDidMount = () => {
+        setLocalNotification();
+    }
+
     handleUnhandledTouches = () => {
         Keyboard.dismiss();
         return false;
     }
-    
+
     render = () => {
         return (
             <Provider store={createStore(reducer)}>
