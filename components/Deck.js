@@ -1,11 +1,14 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import { connect } from "react-redux";
+import { removeDeck } from "../actions";
 import { blue, white, red, orange } from "../utils/color";
 
 class Deck extends React.Component {
     handleDeleteDeck = () => {
-        alert("delete");
+        const { navigation, dispatch, title } = this.props;
+        dispatch(removeDeck(title));
+        navigation.replace("home");
     }
 
     render = () => {
@@ -15,7 +18,7 @@ class Deck extends React.Component {
             <View style={styles.container}>
                 <Text style={styles.deckTitle}>{title}</Text>
                 <Text style={styles.cardCount}>{cards.length} Cards</Text>
-                <TouchableOpacity style={[styles.btn, styles.addBtn]} onPress={() => this.props.navigation.navigate("addCard", {deckName: title})}>
+                <TouchableOpacity style={[styles.btn, styles.addBtn]} onPress={() => this.props.navigation.navigate("addCard", { deckName: title })}>
                     <Text style={styles.btnText}>Add Card</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.btn, styles.quizBtn]} onPress={() => this.props.navigation.navigate("quizView")} >
