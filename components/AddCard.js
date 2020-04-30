@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { addCard } from "../actions";
-import { white, blue } from "../utils/color";
+import { white, blue, disabledBlue } from "../utils/color";
 
 class AddCard extends React.Component {
     state = {
@@ -45,7 +45,7 @@ class AddCard extends React.Component {
                     onChangeText={(input) => this.handleTextChange(input, "answer")}
                     placeholder="Answer"
                 />
-                <TouchableOpacity style={styles.submitBtn} onPress={this.handleSubmit}>
+                <TouchableOpacity style={[styles.submitBtn, { backgroundColor: question === "" || answer === "" ? disabledBlue : blue }]} onPress={this.handleSubmit} disabled={question === "" || answer === ""}>
                     <Text style={styles.submitBtnText}>Submit</Text>
                 </TouchableOpacity>
             </View>
@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
         marginTop: 50,
         padding: 10,
         borderRadius: 10,
-        backgroundColor: blue,
         alignSelf: "center",
     },
     submitBtnText: {

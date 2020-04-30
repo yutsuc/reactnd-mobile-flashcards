@@ -1,7 +1,7 @@
 import React from "react";
 import { KeyboardAvoidingView, Text, TextInput, StyleSheet, TouchableOpacity, Keyboard } from "react-native";
 import { connect } from "react-redux";
-import { blue, white } from "../utils/color";
+import { blue, white, disabledBlue } from "../utils/color";
 import { addDeck } from "../actions";
 
 class AddDeck extends React.Component {
@@ -33,8 +33,8 @@ class AddDeck extends React.Component {
                     value={title}
                     placeholder="Deck Title"
                     onChangeText={this.handleTextChange} />
-                <TouchableOpacity style={styles.submitBtn} onPress={this.handleSubmit}>
-                    <Text style={styles.submitBtnText}>Creat Deck</Text>
+                <TouchableOpacity style={[styles.submitBtn, { backgroundColor: title === "" ? disabledBlue : blue }]} onPress={this.handleSubmit} disabled={title === ""}>
+                    <Text style={styles.submitBtnText}>Create Deck</Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
         );
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     submitBtn: {
         padding: 10,
         borderRadius: 10,
-        backgroundColor: blue,
         alignSelf: "center",
     },
     submitBtnText: {

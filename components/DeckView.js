@@ -34,23 +34,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: "600",
         color: red,
-    }
-    // deckCard: {
-    //     borderWidth: 2,
-    //     borderRadius: 10,
-    //     margin: 10,
-    //     padding: 10,
-    //     alignItems: "center",
-    // },
-    // deckTitle: {
-    //     fontSize: 40,
-    //     fontWeight: "700",
-    //     paddingBottom: 5,
-    // },
-    // cardCount: {
-    //     fontSize: 20,
-    //     color: "gray",
-    // }
+    },
 })
 
 const mapStateToProps = (decks) => {
