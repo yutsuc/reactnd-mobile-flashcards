@@ -18,7 +18,7 @@ class AddDeck extends React.Component {
         const { dispatch, navigation } = this.props;
         const { title } = this.state;
         dispatch(addDeck(title));
-        navigation.replace("home");
+        navigation.navigate("decks");
         navigation.navigate("deck", { deckId: title });
         this.setState({ title: "" });
     }
