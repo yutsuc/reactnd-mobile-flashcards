@@ -35,7 +35,7 @@ const Home = () => {
 const Stack = createStackNavigator();
 
 class App extends React.Component {
-    componentDidMount = () => {
+    componentDidMount() {
         setLocalNotification();
     }
 
