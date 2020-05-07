@@ -21,7 +21,7 @@ const DeckCard = (props) => {
         <Animated.View style={{ transform: [{ scale: bounceValue }] }}>
             <TouchableOpacity style={styles.deckCard} onPress={goToDeck}>
                 <Text style={[styles.deckTitle]}>{title}</Text>
-                <Text style={styles.cardCount}>{count} Cards</Text>
+                <Text style={styles.cardCount}>{count} {count > 1 ? "Cards" : "Card"}</Text>
             </TouchableOpacity>
         </Animated.View>
     );
