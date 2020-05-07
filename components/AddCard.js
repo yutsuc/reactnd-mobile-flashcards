@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { KeyboardAvoidingView, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { addCard } from "../actions";
 import { addCardToDeck } from "../utils/api";
@@ -32,7 +32,7 @@ class AddCard extends React.Component {
     render = () => {
         const { question, answer } = this.state;
         return (
-            <View style={{ paddingTop: 50 }}>
+            <KeyboardAvoidingView behavior="padding" style={{ paddingTop: 50 }}>
                 <TextInput
                     ref={this.questionInput}
                     style={styles.input}
@@ -53,7 +53,7 @@ class AddCard extends React.Component {
                 >
                     <Text style={styles.submitBtnText}>Submit</Text>
                 </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }
